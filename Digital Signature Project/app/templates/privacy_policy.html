@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="content-box">
+            <h1>Privacy Policy</h1>
+            <p>
+                La tua privacy è importante per noi. Questa politica sulla privacy spiega quali dati personali raccogliamo e come li utilizziamo.
+            </p>
+            <h2>Informazioni che raccogliamo</h2>
+            <p>
+                Quando ti registri sul nostro sito, raccogliamo le seguenti informazioni personali:
+            </p>
+            <ul>
+                <li>Nome utente</li>
+                <li>Indirizzo email</li>
+                <li>Password (memorizzata in forma criptata)</li>
+            </ul>
+            <h2>Come utilizziamo le informazioni</h2>
+            <p>
+                Utilizziamo le informazioni raccolte per:
+            </p>
+            <ul>
+                <li>Gestire il tuo account</li>
+                <li>Permettere l'accesso ai servizi</li>
+                <li>Migliorare i nostri servizi</li>
+                <li>Comunicare con te</li>
+            </ul>
+            <h2>Condivisione delle informazioni</h2>
+            <p>
+                Non condividiamo le tue informazioni personali con terze parti, salvo nei casi previsti dalla legge.
+            </p>
+            <h2>Sicurezza delle informazioni</h2>
+            <p>
+                Adottiamo misure di sicurezza adeguate per proteggere le tue informazioni personali.
+            </p>
+            <h2>I tuoi diritti</h2>
+            <p>
+                Hai il diritto di accedere, correggere o cancellare le tue informazioni personali. Puoi anche revocare il tuo consenso in qualsiasi momento.
+            </p>
+            <h2>Modifiche alla politica sulla privacy</h2>
+            <p>
+                Ci riserviamo il diritto di modificare questa politica sulla privacy in qualsiasi momento. Eventuali modifiche saranno pubblicate su questa pagina.
+            </p>
+            <div class="button-container">
+                <a href="{{ url_for('register') }}" class="btn">Torna alla Registrazione</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

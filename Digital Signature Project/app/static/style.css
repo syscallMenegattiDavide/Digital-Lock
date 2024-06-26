@@ -1,0 +1,349 @@
+/* Body Principale */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #2d373e;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #fffdfc;
+}
+
+/* Barra navigazione */
+.navbar {
+    background-color: #0ea434;
+    padding: 10px 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* Brand */
+.navbar .brand {
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 1.4em;
+    margin-left: 20px;
+    display: flex;
+    align-items: center; 
+}
+
+.navbar .brand img {
+    height: 40px; 
+    margin-right: 10px; 
+}
+
+/* Centrare Barra */
+.navbar ul {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    margin-right: 20px;
+}
+
+/* Mettere in linea */
+.navbar ul li {
+    margin: 0 15px;
+    position: relative; 
+}
+
+/* Stile Link nella navbar */
+.navbar ul li a {
+    display: block;
+    padding: 10px;
+    background-color: #242e34; /* Colore di sfondo del link */
+    color: #FFFFFF; /* Colore del testo del link */
+    text-decoration: none; /* Rimuove la sottolineatura */
+    border-radius: 5px; /* Bordo arrotondato */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+a {
+    background-color: #0ea434;
+    color: #fffdfc;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+a:hover, .navbar ul li a:hover {
+    background-color: #0c7d2d;
+    transform: scale(1.05);
+}
+
+/* User Menu */
+.navbar ul li img {
+    width: 40px; 
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.navbar ul li .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #242e34;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 0 0 10px 10px;
+    opacity: 0;
+    top: 100%;
+    right: 0;
+    transition: opacity 0.3s ease;
+}
+
+.navbar ul li .dropdown-content p {
+    color: #FFFFFF;
+    padding: 12px 16px;
+    display: block;
+    margin: 0;
+}
+
+.navbar ul li .dropdown-content a {
+    color: #FFFFFF;
+    padding: 12px 16px;
+    display: block;
+    background: none;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.navbar ul li .dropdown-content a:hover {
+    background-color: #0c7d2d;
+}
+
+.navbar ul li:hover .dropdown-content {
+    display: block;
+    opacity: 1; 
+}
+
+/* Contenitore */ 
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 80px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 70px; 
+}
+
+/* Contenuto contenitore */
+.content-box {
+    padding: 30px 50px;
+    width: 100%;
+    max-width: 800px;
+    border: 1px solid #0ea434;
+    border-radius: 10px;
+    background-color: #242e34;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+/* Titoli */
+h1, h2 {
+    color: #0ea434;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Paragrafi */
+p {
+    line-height: 1.6;
+    color: #fffdfc;
+}
+
+/* Liste */
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #fffdfc;
+}
+
+/* Etichette */
+label {
+    display: block;
+    color: #fffdfc;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Input e Select */
+input[type="file"], select, input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #0ea434;
+    border-radius: 5px;
+    background-color: #2d373e;
+    color: #fffdfc;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="file"]:focus, select:focus, input[type="text"]:focus, input[type="password"]:focus {
+    border-color: #ffe8e0;
+    box-shadow: 0 0 10px rgba(255, 232, 224, 0.5);
+}
+
+/* Pulsante submit */
+input[type="submit"] {
+    background-color: #0ea434;
+    color: #fffdfc;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #0c7d2d;
+    transform: scale(1.05);
+}
+
+/* Messaggio */
+.msg {
+    color: #ffe8e0;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Riquadri per pulsanti */
+ul li {
+    background-color: #2d373e;
+    border: 1px solid #0ea434;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-right: 25px;
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Colore Download e Delete */
+ul li button {
+    background: none;
+    border: none;
+    color: #0ea434;
+    cursor: pointer;
+    font-size: 1em;
+    transition: color 0.3s, transform 0.3s;
+}
+
+ul li button:hover {
+    color: #ffe8e0;
+    transform: scale(1.1);
+}
+
+/* Stile per la Tabella */
+table {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px 0;
+    border-collapse: collapse;
+    background-color: #2d373e;
+    color: #fffdfc;
+    border: 1px solid #0ea434;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table thead {
+    background-color: #0ea434;
+    color: #fffdfc;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+table th {
+    background-color: #0ea434;
+}
+
+table tr:hover {
+    background-color: #3a454c;
+}
+
+.btn {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.btn-download {
+    background-color: #4caf50;
+}
+
+.btn-delete {
+    background-color: #f44336;
+}
+
+.btn-download:hover {
+    background-color: #45a049;
+}
+
+.btn-delete:hover {
+    background-color: #e53935;
+}
+
+
+.password-container {
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password, .toggle-confirm-password {
+    margin-left: 10px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    color: #fffdfc;
+    background-color: #0ea434;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+    background-color: #0c7d2d;
+    transform: scale(1.05);
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>About Us</title>
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="brand">
+                <img src="../static/images/lock.png" alt="Digital Lock">
+                Digital Lock
+            </div>
+            <ul>
+                <li><a href="{{ url_for('upload') }}">Upload Files</a></li>
+                <li><a href="{{ url_for('myfiles') }}">Gestisci Files</a></li>
+                <li><a href="{{ url_for('verify') }}">Verifica Firma</a></li>
+                <li><a href="{{ url_for('about') }}">Chi Siamo</a></li>
+                {% if session.get('is_admin') %}
+                <li><a href="{{ url_for('pagina_admin') }}">Pagina Admin</a></li>
+                {% endif %}
+                <li class="dropdown">
+                    <img src="../static/images/user.png" alt="User Image">
+                    <div class="dropdown-content">
+                        <p class="text"> Username: {{ session.username }}</p>
+                        <p class="text"> E-mail: {{ session.email }}</p>
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                        <a href="#" onclick="deleteAccount(event)">Elimina Account</a>
+                        <form id="delete-account-form" action="{{ url_for('deleteaccount') }}" method="POST" style="display: none;">
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container">
+            <div class="content-box">
+                <h1>Chi Siamo</h1>
+                <p>Digital Lock è una giovane e dinamica compagnia fondata da cinque intraprendenti ragazzi, tutti accomunati dalla passione per la tecnologia e la sicurezza digitale. 
+                   La loro missione è quella di fornire soluzioni innovative e affidabili per la protezione dei dati e la sicurezza informatica, rivolgendosi sia a privati che a aziende. 
+                   Con una combinazione di competenze tecniche avanzate e una visione creativa, Digital Lock si propone di rivoluzionare il settore della cybersecurity, rendendo la protezione digitale accessibile e intuitiva per tutti.</p>
+                <h2>Il nostro Team</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Ruolo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Tommaso Arlati</b></td>
+                            <td>Leader | coordinatore | programmatore sezione containerizzazione</td>
+                        </tr>
+                        <tr>
+                            <td><b>Davide Menegatti</b></td>
+                            <td>Programmatore sezione Database, server web, comunicazione delle pagine | <br>gestore crittografia e hashing</td>
+                        </tr>
+                        <tr>
+                            <td><b>Aldo Ferhati</b></td>
+                            <td>Programmatore sezione Admin</td>
+                        </tr>
+                        <tr>
+                            <td><b>Angelo Scardovi</b></td>
+                            <td> Programmatore sezione estetica (css e impaginazione)</td>
+                        </tr>
+                        <tr>
+                            <td><b>Lorenzo Petrillo</b></td>
+                            <td>Controllo burocratico secondo il GDPR | policy della privacy</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function deleteAccount(event) {
+                event.preventDefault();
+                let choice = confirm('Sei sicuro di voler eliminare il tuo account?\nTutti i tuoi dati verranno persi e saranno irrecuperabili. Vuoi procedere?');
+                if (choice) {
+                    document.getElementById('delete-account-form').submit();
+                }
+            }
+        </script>
+    </body>
+</html>

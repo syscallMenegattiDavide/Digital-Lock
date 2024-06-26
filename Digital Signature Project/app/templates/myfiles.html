@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>I Miei Files</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="brand">
+                <img src="{{ url_for('static', filename='images/lock.png') }}" alt="Digital Lock">
+                Digital Lock
+            </div>
+            <ul>
+                <li><a href="{{ url_for('upload') }}">Upload Files</a></li>
+                <li><a href="{{ url_for('myfiles') }}">Gestisci Files</a></li>
+                <li><a href="{{ url_for('verify') }}">Verifica Firma</a></li>
+                <li><a href="{{ url_for('about') }}">Chi Siamo</a></li>
+                {% if session.get('is_admin') %}
+                <li><a href="{{ url_for('pagina_admin') }}">Pagina Admin</a></li>
+                {% endif %}
+                <li class="dropdown">
+                    <img src="{{ url_for('static', filename='images/user.png') }}" alt="User Image">
+                    <div class="dropdown-content">
+                        <p class="text"> Username: {{ session.username }}</p>
+                        <p class="text"> E-mail: {{ session.email }}</p>
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                        <a href="#" onclick="deleteAccount(event)">Elimina Account</a>
+                        <form id="delete-account-form" action="{{ url_for('deleteaccount') }}" method="POST" style="display: none;">
+                        </form>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="container">
+            <div class="content-box">
+                <h2 style="margin-left: -7%;">I Miei Files</h2>
+                {% if msg %}
+                <p>{{ msg }}</p><br>
+                <a href="{{ url_for('myfiles') }}">Torna ai tuoi files</a>
+                {% else %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Titolo</th>
+                            <th style="text-align: center;">Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if files %}
+                        {% for file in files %}
+                        <tr>
+                            <td style="width: 50%; text-align: center;">{{ file.title }}</td>
+                            <td class="actions">
+                                <a href="{{ url_for('download', file_id=file.id) }}" class="btn btn-download" style="margin-left: 20px;">Download</a>
+                                <a href="{{ url_for('delete', file_id=file.id) }}" class="btn btn-delete" style="margin-left: 100px;">Delete</a>
+                            </td> 
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="2" align="center">Non hai ancora uploadato files.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <a href="{{ url_for('upload') }}">Aggiungili!</a>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    </tbody>                    
+                </table>
+                {% endif %}
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            function deleteAccount(event) {
+                event.preventDefault();
+                let choice = confirm('Sei sicuro di voler eliminare il tuo account?\nTutti i tuoi dati verranno persi e saranno irrecuperabili. Vuoi procedere?');
+                if (choice) {
+                    document.getElementById('delete-account-form').submit();
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function validatePasswords(event) {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+            var errorMessage = document.getElementById("error-message");
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = "Le password non corrispondono.";
+                event.preventDefault();
+                return false;
+            }
+
+            errorMessage.textContent = "";
+            return true;
+        }
+        
+        window.addEventListener('DOMContentLoaded', (event) => {
+            var form = document.querySelector("form");
+            form.addEventListener("submit", validatePasswords);
+        });
+
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById('password');
+            var passwordToggle = document.querySelector('.toggle-password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.textContent = '👁️';
+            }
+        };
+
+        function toggleConfirmPasswordVisibility() {
+            var passwordInput = document.getElementById('confirm_password');
+            var passwordToggle = document.querySelector('.toggle-confirm-password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.textContent = '👁️';
+            }
+        };
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src=".././static/images/lock.png" alt="Digital Lock">
+            Digital Lock
+        </div>
+    </nav>
+    <div class="container">
+        <div class="content-box">
+            <h1 class="word">Registrati</h1>
+            <form action="{{ url_for('register') }}" method="post">
+                <input id="username" name="username" type="text" placeholder="Inserisci il tuo username" class="textbox" required>
+                <input id="email" name="email" type="text" placeholder="Inserisci la tua e-mail" class="textbox" required>
+                <div class="password-container">
+                    <input id="password" name="password" type="password" placeholder="Inserisci la tua Password" class="textbox" required>
+                    <span class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
+                </div>
+                <div class="password-container">
+                    <input id="confirm_password" name="confirm_password" type="password" placeholder="Conferma la password" class="textbox" required>
+                    <span class="toggle-confirm-password" onclick="toggleConfirmPasswordVisibility()">👁️</span>
+                </div>
+                <div>
+                    <input type="checkbox" name="consent" required>I agree to the privacy policy
+                    <br><br>
+                    <a href="{{ url_for('privacy_policy') }}">Privacy Policy</a>
+                </div>
+                <br><br>
+                <input type="submit" value="Registrati">
+                <p id="error-message" style="color: red;"></p>
+            </form>
+            <p class="bottom">Hai già un account? <a class="bottom" href="{{ url_for('login') }}">Accedi</a></p>
+        </div>
+    </div>
+</body>
+</html>

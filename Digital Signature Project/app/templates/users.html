@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizza Utenti</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="{{ url_for('static', filename='images/lock.png') }}" alt="Digital Lock">
+            Digital Lock
+        </div>
+        <ul>
+            <li><a href="{{ url_for('upload') }}">Upload Files</a></li>
+            <li><a href="{{ url_for('myfiles') }}">Gestisci Files</a></li>
+            <li><a href="{{ url_for('verify') }}">Verifica Firma</a></li>
+            <li><a href="{{ url_for('about') }}">Chi Siamo</a></li>
+            {% if session.get('is_admin') %}
+            <li><a href="{{ url_for('pagina_admin') }}">Pagina Admin</a></li>
+            {% endif %}
+            <li class="dropdown">
+                <img src="{{ url_for('static', filename='images/user.png') }}" alt="User Image">
+                <div class="dropdown-content">
+                    <p class="text"> Username: {{ session.username }}</p>
+                    <p class="text"> E-mail: {{ session.email }}</p>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                    <a href="#" onclick="deleteAccount(event)">Elimina Account</a>
+                    <form id="delete-account-form" action="{{ url_for('deleteaccount') }}" method="POST" style="display: none;">
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div class="content-box">
+    <h1>Tabella Utenti</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Admin</th>
+                <th colspan="2">Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for account in accounts %}
+            <tr style="height: 60px;">
+                <td>{{ account.id }}</td>
+                <td>{{ account.username }}</td>
+                <td>{{ account.email }}</td>
+                <td>{{ 'Sì' if account.is_admin else 'No' }}</td>
+                {% if account.id != session['id'] %}
+                <td>
+                    {% if not account.is_admin %}
+                    <a href="#" onclick="makeAdmin(event, '{{ account.id }}' ) ">Rendi Admin</a>
+                    {% else %}
+                    <a href="#" onclick="removeAdmin(event, '{{ account.id }}')">Rimuovi Admin
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="#" onclick="deleteUserAccount(event, '{{ account.id }}')">Elimina account</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <script type="text/javascript">
+        function deleteAccount(event) {
+            event.preventDefault();
+            let choice = confirm('Sei sicuro di voler eliminare il tuo account?\nTutti i tuoi dati verranno persi e saranno irrecuperabili. Vuoi procedere?');
+            if (choice) {
+                document.getElementById('delete-account-form').submit();
+            }
+        }
+    
+        function makeAdmin(event, accountId) {
+            event.preventDefault();
+            if (confirm('Sei sicuro di voler rendere questo utente un admin?')) {
+                fetch('{{ url_for('makeadmin') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ account_id: accountId })
+                }).then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    } else {
+                        alert('Si è verificato un errore.');
+                    }
+                });
+            }
+        }
+    
+        function removeAdmin(event, accountId) {
+            event.preventDefault();
+            if (confirm('Sei sicuro di voler rimuovere i privilegi di amministratore per questo utente?')) {
+                fetch('{{ url_for('removeadmin') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ account_id: accountId })
+                }).then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    } else {
+                        alert('Si è verificato un errore.');
+                    }
+                });
+            }
+        }
+    
+        function deleteUserAccount(event, accountId) {
+            event.preventDefault();
+            if (confirm('Sei sicuro di voler eliminare questo account?')) {
+                fetch('{{ url_for('delete_user_account') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ account_id: accountId })
+                }).then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    } else {
+                        alert('Si è verificato un errore.');
+                    }
+                });
+            }
+        }
+    </script>
+    
+</body>
+</html>

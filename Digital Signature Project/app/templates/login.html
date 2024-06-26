@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="brand">
+            <img src="../static/images/lock.png">
+            Digital Lock
+        </div>
+    </nav>
+    <div class="container">
+        <div class="content-box">
+            <div class="header">
+                <h1 class="word">Login</h1>
+            </div>
+            <form action="{{ url_for('login') }}" method="post">
+                <input id="username" name="username" type="text" placeholder="Inserisci il tuo Username" class="textbox" required>
+                <div class="password-container">
+                    <input id="password" name="password" type="password" placeholder="Inserisci la tua Password" class="textbox" required>
+                    <span class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
+                </div>
+                <input type="submit" value="Accedi">
+            </form>
+            {%if msg %}
+                {{ msg }}
+            {% endif %}
+            <p>Non sei registrato? <a href="{{ url_for('register') }}">Registrati qua!</a></p>
+        </div>
+    </div>
+    <script>
+        function togglePasswordVisibility() {
+            var passwordInput = document.getElementById('password');
+            var passwordToggle = document.querySelector('.toggle-password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordToggle.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                passwordToggle.textContent = '👁️';
+            }
+        }
+    </script>
+</body>
+</html>

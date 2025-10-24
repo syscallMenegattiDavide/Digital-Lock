@@ -4,9 +4,10 @@ Sistema di Firma Digitale
 
 Membri e Ruoli:
 - Davide Menegatti: Programmatore sezione Database | server web | comunicazione delle pagine | gestore crittografia e hashing
-- Aldo Ferhati: Programmatore sezione Admin - Lorenzo Petrillo: Controllo burocratico secondo il GDPR | policy della privacy
+- Aldo Ferhati: Programmatore sezione Admin
+- Lorenzo Petrillo: Controllo burocratico secondo il GDPR | policy della privacy
 - Angelo Scardovi: Programmatore sezione estetica (css e impaginazione)
- - Tommaso Arlati: Leader | coordinatore | programmatore sezione containerizzazione 
+- Tommaso Arlati: Leader | coordinatore | programmatore sezione containerizzazione 
 
 Descrizione del Progetto
 Il progetto mira a creare un sistema basilare per la firma e la verifica dei documenti utilizzando firme digitali, sviluppato in Python e supportato da una base di dati per memorizzare le informazioni essenziali.
